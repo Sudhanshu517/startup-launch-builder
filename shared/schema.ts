@@ -10,7 +10,7 @@ export const users = pgTable("users", {
 
 export const pages = pgTable("pages", {
   id: serial("id").primaryKey(),
-  userId: integer("user_id").references(() => users.id),
+  userId: integer("user_id").references(() => users.id).notNull(),
   name: text("name").notNull(),
   sections: jsonb("sections").notNull().default('[]'),
   settings: jsonb("settings").notNull().default('{}'),

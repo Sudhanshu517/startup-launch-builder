@@ -124,11 +124,30 @@ export function BuilderProvider({ children }: { children: React.ReactNode }) {
   const queryClient = useQueryClient();
 
   // Load existing page or create new one
+  const { data: pages } = useQuery({
+    queryKey: ['/api/pages'],
+    queryFn: async () => {
+      const response = await fetch('/api/pages');
+      if (!response.ok) {
+        throw new Error('Failed to fetch pages');
+      }
+      return response.json();
+    },
+  });
+
   useEffect(() => {
-    // For demo, create a default page with hero section
-    const defaultSections = [createDefaultSection('hero')];
-    setSections(defaultSections);
-  }, []);
+    if (pages && Array.isArray(pages) && pages.length > 0) {
+      // Load the first page found
+      const page = pages[0];
+      setCurrentPage(page);
+      setSections(Array.isArray(page.sections) ? page.sections : []);
+      setPageSettings(page.settings || defaultPageSettings);
+    } else {
+      // Create default page with hero section
+      const defaultSections = [createDefaultSection('hero')];
+      setSections(defaultSections);
+    }
+  }, [pages]);
 
   const addSection = useCallback((type: Section['type'], index?: number) => {
     const newSection = createDefaultSection(type);
@@ -248,13 +267,53 @@ export function BuilderProvider({ children }: { children: React.ReactNode }) {
     });
   }, [toast]);
 
+  const savePageMutation = useMutation({
+    mutationFn: async (pageData: { name: string; sections: Section[]; settings: PageSettings }) => {
+      if (currentPage) {
+        // Update existing page
+        const response = await fetch(`/api/pages/${currentPage.id}`, {
+          method: 'PUT',
+          body: JSON.stringify(pageData),
+          headers: { 'Content-Type': 'application/json' },
+        });
+        if (!response.ok) throw new Error('Failed to update page');
+        return response.json();
+      } else {
+        // Create new page
+        const response = await fetch('/api/pages', {
+          method: 'POST',
+          body: JSON.stringify(pageData),
+          headers: { 'Content-Type': 'application/json' },
+        });
+        if (!response.ok) throw new Error('Failed to create page');
+        return response.json();
+      }
+    },
+    onSuccess: (savedPage) => {
+      setCurrentPage(savedPage);
+      queryClient.invalidateQueries({ queryKey: ['/api/pages'] });
+      toast({
+        title: "Page Saved",
+        description: "Your page has been saved successfully.",
+      });
+    },
+    onError: (error) => {
+      toast({
+        title: "Save Failed",
+        description: "Failed to save your page. Please try again.",
+        variant: "destructive",
+      });
+    },
+  });
+
   const savePage = useCallback(() => {
-    // For demo, just show success message
-    toast({
-      title: "Page Saved",
-      description: "Your page has been saved successfully.",
-    });
-  }, [toast]);
+    const pageData = {
+      name: currentPage?.name || 'My Landing Page',
+      sections,
+      settings: pageSettings,
+    };
+    savePageMutation.mutate(pageData);
+  }, [currentPage, sections, pageSettings, savePageMutation]);
 
   const value: BuilderContextType = {
     sections,

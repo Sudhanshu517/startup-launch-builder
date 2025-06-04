@@ -1,0 +1,21 @@
+[vite] connecting...
+[vite] connected.
+Warning: Connect(Droppable): Support for defaultProps will be removed from memo components in a future major release. Use JavaScript default parameters instead.
+    at aside
+    at ComponentLibrary
+    at div
+    at div
+    at Provider (https://a8bb82d8-0c53-465e-b0f2-9b70ffe9ef5e-00-14w3q0h3ekfuk.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/react-beautiful-dnd.js?v=687df1b5:1738:20)
+    at App (https://a8bb82d8-0c53-465e-b0f2-9b70ffe9ef5e-00-14w3q0h3ekfuk.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/react-beautiful-dnd.js?v=687df1b5:8281:25)
+    at ErrorBoundary2 (https://a8bb82d8-0c53-465e-b0f2-9b70ffe9ef5e-00-14w3q0h3ekfuk.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/react-beautiful-dnd.js?v=687df1b5:2778:35)
+    at DragDropContext (https://a8bb82d8-0c53-465e-b0f2-9b70ffe9ef5e-00-14w3q0h3ekfuk.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/react-beautiful-dnd.js?v=687df1b5:8401:19)
+    at DragDropProvider (https://a8bb82d8-0c53-465e-b0f2-9b70ffe9ef5e-00-14w3q0h3ekfuk.spock.replit.dev/src/components/builder/drag-drop-provider.tsx:20:36)
+    at BuilderProvider (https://a8bb82d8-0c53-465e-b0f2-9b70ffe9ef5e-00-14w3q0h3ekfuk.spock.replit.dev/src/hooks/use-builder.tsx:92:35)
+    at Builder
+    at Route (https://a8bb82d8-0c53-465e-b0f2-9b70ffe9ef5e-00-14w3q0h3ekfuk.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/wouter.js?v=3f757f05:323:16)
+    at Switch (https://a8bb82d8-0c53-465e-b0f2-9b70ffe9ef5e-00-14w3q0h3ekfuk.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/wouter.js?v=3f757f05:379:17)
+    at Router
+    at Provider (https://a8bb82d8-0c53-465e-b0f2-9b70ffe9ef5e-00-14w3q0h3ekfuk.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-XXI3UTWJ.js?v=4bd95ae5:58:15)
+    at TooltipProvider (https://a8bb82d8-0c53-465e-b0f2-9b70ffe9ef5e-00-14w3q0h3ekfuk.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/@radix-ui_react-tooltip.js?v=f5ff1a14:56:5)
+    at QueryClientProvider (https://a8bb82d8-0c53-465e-b0f2-9b70ffe9ef5e-00-14w3q0h3ekfuk.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/@tanstack_react-query.js?v=32186a97:2805:3)
+    at App
