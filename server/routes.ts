@@ -85,6 +85,34 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Save layout mock route
+app.post("/api/save", async (req, res) => {
+  try {
+    const mockPageData = {
+      name: "Mock Landing Page",
+      sections: [
+        { id: "1", type: "hero", content: { heading: "Welcome to Startup Builder" }, order: 1 },
+        { id: "2", type: "features", content: { features: ["Fast", "Flexible", "Free"] }, order: 2 },
+      ],
+      settings: {
+        primaryColor: "#3B82F6",
+        fontFamily: "Inter",
+        backgroundColor: "#ffffff",
+        responsive: true,
+      },
+      userId: 1, // demo user
+    };
+
+    const page = await storage.createPage(mockPageData);
+    res.status(201).json({ message: "Page saved", page });
+  } catch (error) {
+    console.error("Save layout failed:", error);
+    res.status(500).json({ message: "Failed to save layout" });
+  }
+});
+
+
+
   const httpServer = createServer(app);
   return httpServer;
 }

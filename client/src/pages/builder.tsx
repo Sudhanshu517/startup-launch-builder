@@ -6,6 +6,10 @@ import { PropertiesPanel } from "@/components/builder/properties-panel";
 import { TemplatesModal } from "@/components/builder/templates-modal";
 import { ExportModal } from "@/components/builder/export-modal";
 import { BuilderProvider } from "@/hooks/use-builder";
+import SaveLayoutButton from "../components/ui/SaveLayoutButton";
+
+
+
 
 export default function Builder() {
   return (
@@ -22,6 +26,7 @@ export default function Builder() {
 
           <TemplatesModal />
           <ExportModal />
+          <SaveLayoutButton />
         </div>
       </DragDropProvider>
     </BuilderProvider>
